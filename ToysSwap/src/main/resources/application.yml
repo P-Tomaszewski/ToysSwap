@@ -1,0 +1,15 @@
+spring:
+  h2.console:
+    enabled: true
+    path: '/console'
+  datasource:
+    url: 'jdbc:h2:file:/C:/Users/P_Tomaszewski/Downloads/ToysSwap/ToysSwap/toysswap-db'
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    baseline-on-migrate: on
+    hibernate:
+      dialect=org:
+        hibernate:
+          dialect: H2Dialect
