@@ -5,7 +5,9 @@ import com.tomaszewski.ToysSwap.enums.Brand;
 import com.tomaszewski.ToysSwap.enums.ProductCategory;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Entity
@@ -19,10 +21,10 @@ public class Advertisement {
     @NotEmpty
     private String description;
     @NotEmpty
-    private byte[] photo;
+    private String photo;
     @NotEmpty
     private String ageCategory;
-    @NotEmpty
+    @NotNull
     private BigDecimal price;
     @NotEmpty
     private String city;
@@ -30,13 +32,9 @@ public class Advertisement {
     private String category;
     @NotEmpty
     private String brand;
-    @NotEmpty
-    private boolean send;
-    @NotEmpty
-    private boolean negotiablePrice;
 
-    public Advertisement(String title, String description, byte[] photo, String ageCategory, BigDecimal price,
-                         String country, String category, String brand, boolean send, boolean negotiablePrice) {
+    public Advertisement(String title, String description, String photo, String ageCategory, BigDecimal price,
+                         String country, String category, String brand) {
         this.title = title;
         this.description = description;
         this.photo = photo;
@@ -45,8 +43,6 @@ public class Advertisement {
         this.city = country;
         this.category = category;
         this.brand = brand;
-        this.send = send;
-        this.negotiablePrice = negotiablePrice;
     }
 
     public Advertisement() {
@@ -81,11 +77,11 @@ public class Advertisement {
         this.description = description;
     }
 
-    public byte[] getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(byte[] photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 
@@ -119,21 +115,5 @@ public class Advertisement {
 
     public void setCategory(ProductCategory category) {
         this.category = category.getDisplayValue();
-    }
-
-    public boolean isSend() {
-        return send;
-    }
-
-    public void setSend(boolean send) {
-        this.send = send;
-    }
-
-    public boolean isNegotiablePrice() {
-        return negotiablePrice;
-    }
-
-    public void setNegotiablePrice(boolean negotiablePrice) {
-        this.negotiablePrice = negotiablePrice;
     }
 }

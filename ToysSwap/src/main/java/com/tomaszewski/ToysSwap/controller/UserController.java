@@ -23,14 +23,14 @@ public class UserController {
     }
 
     @ResponseBody
-    @PostMapping("/races")
+    @PostMapping("/users")
     ResponseEntity<User> createUser(@RequestBody @Valid User toCreate){
         User result = repository.save(toCreate);
         return ResponseEntity.created(URI.create("/" + result.getId())).body(result);
     }
 
     @ResponseBody
-    @GetMapping("/races")
+    @GetMapping("/users")
     ResponseEntity<List<User>> readAllUsers(){
         logger.warn("Exposing all tasks");
         return ResponseEntity.ok(repository.findAll());

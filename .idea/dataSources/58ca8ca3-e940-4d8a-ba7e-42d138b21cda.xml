@@ -172,12 +172,12 @@
     <collation id="160" parent="2" name="UKRAINIAN_UKRAINE"/>
     <collation id="161" parent="2" name="VIETNAMESE"/>
     <collation id="162" parent="2" name="VIETNAMESE_VIETNAM"/>
-    <sequence id="163" parent="4" name="SYSTEM_SEQUENCE_A784CD60_AEFA_4542_BF74_BCD3DEAD4836">
+    <sequence id="163" parent="4" name="SYSTEM_SEQUENCE_32695013_E586_4011_A743_82E559647B6C">
       <ObjectId>8</ObjectId>
       <NameSurrogate>1</NameSurrogate>
       <AutoCreated>1</AutoCreated>
     </sequence>
-    <sequence id="164" parent="4" name="SYSTEM_SEQUENCE_FE593107_8FC5_4473_96E6_F19183B11B02">
+    <sequence id="164" parent="4" name="SYSTEM_SEQUENCE_6CA6C3AF_1D43_4229_B503_29D3DFD7D35F">
       <ObjectId>4</ObjectId>
       <NameSurrogate>1</NameSurrogate>
       <AutoCreated>1</AutoCreated>
@@ -204,42 +204,37 @@
       <DataType>VARCHAR(300)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="170" parent="165" name="AGECATEGORY">
+    <column id="170" parent="165" name="AGE_CATEGORY">
       <Position>4</Position>
       <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="171" parent="165" name="PRICE">
+    <column id="171" parent="165" name="PHOTO">
       <Position>5</Position>
-      <DataType>DECIMAL(100)|0s</DataType>
+      <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="172" parent="165" name="CITY">
+    <column id="172" parent="165" name="PRICE">
       <Position>6</Position>
-      <DataType>VARCHAR(100)|0s</DataType>
+      <DataType>NUMERIC|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="173" parent="165" name="CATEGORY">
+    <column id="173" parent="165" name="CITY">
       <Position>7</Position>
       <DataType>VARCHAR(100)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="174" parent="165" name="BRAND">
+    <column id="174" parent="165" name="CATEGORY">
       <Position>8</Position>
       <DataType>VARCHAR(100)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="175" parent="165" name="SEND">
+    <column id="175" parent="165" name="BRAND">
       <Position>9</Position>
-      <DataType>BOOLEAN|0s</DataType>
+      <DataType>VARCHAR(100)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="176" parent="165" name="NEGOTIABLEPRICE">
-      <Position>10</Position>
-      <DataType>BOOLEAN|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <index id="177" parent="165" name="PRIMARY_KEY_B">
+    <index id="176" parent="165" name="PRIMARY_KEY_B">
       <ObjectId>9</ObjectId>
       <NameSurrogate>1</NameSurrogate>
       <SourceTextLength>77</SourceTextLength>
@@ -247,46 +242,46 @@
       <Unique>1</Unique>
       <AutoCreated>1</AutoCreated>
     </index>
-    <key id="178" parent="165" name="CONSTRAINT_B">
+    <key id="177" parent="165" name="CONSTRAINT_B">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="179" parent="166" name="ID">
+    <column id="178" parent="166" name="ID">
       <Position>1</Position>
       <DataType>INT|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="180" parent="166" name="LOGIN">
+    <column id="179" parent="166" name="LOGIN">
       <Position>2</Position>
       <DataType>VARCHAR(100)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="181" parent="166" name="PASSWORD">
+    <column id="180" parent="166" name="PASSWORD">
       <Position>3</Position>
       <DataType>VARCHAR(100)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="182" parent="166" name="NAME">
+    <column id="181" parent="166" name="NAME">
       <Position>4</Position>
       <DataType>VARCHAR(100)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="183" parent="166" name="EMAIL">
+    <column id="182" parent="166" name="EMAIL">
       <Position>5</Position>
       <DataType>VARCHAR(100)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="184" parent="166" name="LASTNAME">
+    <column id="183" parent="166" name="LAST_NAME">
       <Position>6</Position>
       <DataType>VARCHAR(100)|0s</DataType>
     </column>
-    <column id="185" parent="166" name="CITY">
+    <column id="184" parent="166" name="CITY">
       <Position>7</Position>
       <DataType>VARCHAR(100)|0s</DataType>
     </column>
-    <index id="186" parent="166" name="PRIMARY_KEY_4">
+    <index id="185" parent="166" name="PRIMARY_KEY_4">
       <ObjectId>5</ObjectId>
       <NameSurrogate>1</NameSurrogate>
       <SourceTextLength>69</SourceTextLength>
@@ -294,7 +289,7 @@
       <Unique>1</Unique>
       <AutoCreated>1</AutoCreated>
     </index>
-    <key id="187" parent="166" name="CONSTRAINT_4">
+    <key id="186" parent="166" name="CONSTRAINT_4">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>

@@ -19,8 +19,8 @@ public class User {
     private String name;
     private String lastName;
     private String city;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "driver", orphanRemoval = true)
-    private List<Advertisement> advertisements;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "driver", orphanRemoval = true)
+//    private List<Advertisement> advertisements;
 
     public User(String login, String password, String email) {
         this.login = login;
@@ -35,13 +35,13 @@ public class User {
         return id;
     }
 
-    public List<Advertisement> getAdvertisements() {
-        return advertisements;
-    }
-
-    public void setAdvertisements(List<Advertisement> advertisements) {
-        this.advertisements = advertisements;
-    }
+//    public List<Advertisement> getAdvertisements() {
+//        return advertisements;
+//    }
+//
+//    public void setAdvertisements(List<Advertisement> advertisements) {
+//        this.advertisements = advertisements;
+//    }
 
     public String getLogin() {
         return login;
