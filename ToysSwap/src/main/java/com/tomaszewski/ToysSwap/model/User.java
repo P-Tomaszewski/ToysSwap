@@ -22,10 +22,11 @@ public class User {
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "driver", orphanRemoval = true)
 //    private List<Advertisement> advertisements;
 
-    public User(String login, String password, String email) {
+    public User(String login, String password, String email, String name) {
         this.login = login;
         this.password = password;
         this.email = email;
+        this.name = name;
     }
 
     public User() {
