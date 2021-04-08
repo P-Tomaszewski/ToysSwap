@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -33,5 +34,12 @@ public class AdvertisementController {
     ResponseEntity<List<Advertisement>> readAllAdvertisements(){
         logger.warn("Exposing all tasks");
         return ResponseEntity.ok(repository.findAll());
+    }
+
+    @ResponseBody
+    @GetMapping(value = "/advertisements/{id}")
+    public Advertisement getAdvertisement(@PathVariable("id") int id){
+        logger.warn("ret adv");
+        return repository.findById(id).get();
     }
 }
