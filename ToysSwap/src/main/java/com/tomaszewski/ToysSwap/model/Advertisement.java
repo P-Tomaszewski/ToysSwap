@@ -5,9 +5,9 @@ import com.tomaszewski.ToysSwap.enums.Brand;
 import com.tomaszewski.ToysSwap.enums.ProductCategory;
 
 import javax.persistence.*;
-import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.io.File;
 import java.math.BigDecimal;
 
 @Entity
@@ -33,8 +33,8 @@ public class Advertisement {
     @NotEmpty
     private String brand;
 
-    public Advertisement(String title, String description, String photo, String ageCategory, BigDecimal price,
-                         String country, String category, String brand) {
+    public Advertisement(String title, String description, String ageCategory, BigDecimal price,
+                         String country, String category, String brand, String photo) {
         this.title = title;
         this.description = description;
         this.photo = photo;
@@ -47,6 +47,14 @@ public class Advertisement {
 
     public Advertisement() {
 
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public int getId() {
@@ -77,13 +85,7 @@ public class Advertisement {
         this.description = description;
     }
 
-    public String getPhoto() {
-        return photo;
-    }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
 
     public String getAgeCategory() {
         return ageCategory;
