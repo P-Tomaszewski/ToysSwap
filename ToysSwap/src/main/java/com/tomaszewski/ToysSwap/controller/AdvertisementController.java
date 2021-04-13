@@ -31,25 +31,7 @@ public class AdvertisementController {
         this.repository = repository;
     }
 
-    @ResponseBody
-    @PostMapping("/advertisements")
-    ResponseEntity<Advertisement> createAdvertisement(@RequestBody @Valid Advertisement toCreate) {
-//        toCreate.setPhoto(toCreate.getPhoto().substring(12));
-//        toCreate.setPhoto(toCreate.getPhotoFile().getName());
-//        Advertisement advertisement = new Advertisement();
-//
-//
-//        advertisement.setPhoto(toCreate.getPhotoFile().getName());
-//        advertisement.setAgeCategory(AgeCategory.valueOf(toCreate.getAgeCategory()));
-//        advertisement.setBrand(Brand.valueOf(toCreate.getBrand()));
-//        advertisement.setCategory(ProductCategory.valueOf(toCreate.getCategory()));
-//        advertisement.setTitle(toCreate.getTitle());
-//        advertisement.setDescription(toCreate.getDescription());
-//        advertisement.setPrice(toCreate.getPrice());
-////        handleFileUpload(toCreate.getPhotoFile());
-        Advertisement result = repository.save(toCreate);
-        return ResponseEntity.created(URI.create("/" + result.getId())).body(result);
-    }
+
 
     @ResponseBody
     @GetMapping("/advertisements")
@@ -70,6 +52,13 @@ public class AdvertisementController {
 //    public void postImage(@RequestParam("file") File file) throws IOException {
 //        System.out.println("received");
 //    }
+
+@ResponseBody
+@PostMapping("/advertisements")
+ResponseEntity<Advertisement> createAdvertisement(@RequestBody Advertisement toCreate) {
+    Advertisement result = repository.save(toCreate);
+    return ResponseEntity.created(URI.create("/" + result.getId())).body(result);
+}
 
     @ResponseBody
     @PostMapping(value = "/upload")
