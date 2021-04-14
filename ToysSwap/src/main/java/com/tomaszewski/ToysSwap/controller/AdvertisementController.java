@@ -65,6 +65,7 @@ ResponseEntity<Advertisement> createAdvertisement(@RequestBody Advertisement toC
     public String handleFileUpload(@RequestParam("file") MultipartFile file) {
         if (!file.isEmpty()) {
             try {
+//                System.out.println(file.getResource().getFilename());
                 UUID uuid = UUID.randomUUID();
                 String filename = uuid.toString();
                 byte[] bytes = file.getBytes();
@@ -75,6 +76,14 @@ ResponseEntity<Advertisement> createAdvertisement(@RequestBody Advertisement toC
                 stream.write(bytes);
                 stream.close();
                 logger.info("File {} has been successfully uploaded as {}", new Object[]{file.getOriginalFilename(), filename});
+                Advertisement advertisement = repository.findById(Integer
+                        .parseInt(file
+                                .getResource()
+                                .getFilename()))
+                        .get();
+                advertisement.setPhoto(filename);
+                repository.save(advertisement);
+
             } catch (Exception e) {
                 logger.error("File has not been uploaded", e);
             }
