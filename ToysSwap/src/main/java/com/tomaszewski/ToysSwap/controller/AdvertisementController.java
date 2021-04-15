@@ -32,7 +32,6 @@ public class AdvertisementController {
     }
 
 
-
     @ResponseBody
     @GetMapping("/advertisements")
     ResponseEntity<List<Advertisement>> readAllAdvertisements() {
@@ -53,12 +52,12 @@ public class AdvertisementController {
 //        System.out.println("received");
 //    }
 
-@ResponseBody
-@PostMapping("/advertisements")
-ResponseEntity<Advertisement> createAdvertisement(@RequestBody Advertisement toCreate) {
-    Advertisement result = repository.save(toCreate);
-    return ResponseEntity.created(URI.create("/" + result.getId())).body(result);
-}
+    @ResponseBody
+    @PostMapping("/advertisements")
+    ResponseEntity<Advertisement> createAdvertisement(@RequestBody Advertisement toCreate) {
+        Advertisement result = repository.save(toCreate);
+        return ResponseEntity.created(URI.create("/" + result.getId())).body(result);
+    }
 
     @ResponseBody
     @PostMapping(value = "/upload")
@@ -75,13 +74,15 @@ ResponseEntity<Advertisement> createAdvertisement(@RequestBody Advertisement toC
                 BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(filePath));
                 stream.write(bytes);
                 stream.close();
+
+
                 logger.info("File {} has been successfully uploaded as {}", new Object[]{file.getOriginalFilename(), filename});
-                Advertisement advertisement = repository.findById(Integer
-                        .parseInt(file
-                                .getResource()
-                                .getFilename()))
-                        .get();
+                Advertisement advertisement = repository.findById(
+                        Integer.parseInt(file.getResource().getFilename())).get();
                 advertisement.setPhoto(filename);
+                System.out.println((file
+                        .getResource()
+                        .getFilename()));
                 repository.save(advertisement);
 
             } catch (Exception e) {
