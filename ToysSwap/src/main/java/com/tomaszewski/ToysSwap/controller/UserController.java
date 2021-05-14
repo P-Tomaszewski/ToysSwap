@@ -10,6 +10,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -39,6 +40,15 @@ public class UserController {
     ResponseEntity<List<User>> readAllUsers(){
         logger.warn("Exposing all tasks");
         return ResponseEntity.ok(repository.findAll());
+    }
+
+    @ResponseBody
+    @GetMapping(value = "/user/{username}")
+    public User getUserById(@PathVariable("username") String username){
+        logger.warn("Exposing all tasks");
+        User user =  repository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
+        return user;
     }
 
 

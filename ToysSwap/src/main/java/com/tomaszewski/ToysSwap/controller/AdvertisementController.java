@@ -55,7 +55,7 @@ public class AdvertisementController {
 
     @ResponseBody
     @PostMapping("/advertisements")
-//    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('Admin')")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     ResponseEntity<Advertisement> createAdvertisement(@RequestBody Advertisement toCreate) {
         Advertisement result = repository.save(toCreate);
         return ResponseEntity.created(URI.create("/" + result.getId())).body(result);

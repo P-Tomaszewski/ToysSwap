@@ -10,11 +10,11 @@ import java.util.Optional;
 //public interface UserRepository extends CrudRepository<User, Integer> {
 public interface UserRepository extends JpaRepository<User, Long> {
 //    List<User> findAll();
-//    Optional<User> findById(Integer id);
+    Optional<User> findById(Integer id);
 //    User save(User entity);
 //    boolean existsById(Integer id);
 //    void deleteById(int id);
-Optional<User> findByUsername(String username);
+    Optional<User> findByUsername(String username);
 
     Boolean existsByUsername(String username);
 
