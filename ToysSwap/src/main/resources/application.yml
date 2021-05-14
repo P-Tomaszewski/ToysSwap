@@ -13,3 +13,8 @@ spring:
       dialect=org:
         hibernate:
           dialect: H2Dialect
+  security:
+    user:
+      password: password
+    ignored:
+    - "*.bundle.*"

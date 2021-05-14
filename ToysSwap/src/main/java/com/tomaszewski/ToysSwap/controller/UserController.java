@@ -4,11 +4,17 @@ import com.tomaszewski.ToysSwap.model.User;
 import com.tomaszewski.ToysSwap.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -34,4 +40,6 @@ public class UserController {
         logger.warn("Exposing all tasks");
         return ResponseEntity.ok(repository.findAll());
     }
+
+
 }

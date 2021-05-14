@@ -2,7 +2,6 @@ package com.tomaszewski.ToysSwap.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.List;
 
 @Entity
 @Table(name="users")
@@ -11,7 +10,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotEmpty(message = "imie nie moze byc puste")
-    private String login;
+    private String username;
     @NotEmpty
     private String password;
     @NotEmpty
@@ -22,8 +21,8 @@ public class User {
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "driver", orphanRemoval = true)
 //    private List<Advertisement> advertisements;
 
-    public User(String login, String password, String email, String name) {
-        this.login = login;
+    public User(String username, String password, String email, String name) {
+        this.username = username;
         this.password = password;
         this.email = email;
         this.name = name;
@@ -44,12 +43,12 @@ public class User {
 //        this.advertisements = advertisements;
 //    }
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String login) {
+        this.username = login;
     }
 
     public String getPassword() {

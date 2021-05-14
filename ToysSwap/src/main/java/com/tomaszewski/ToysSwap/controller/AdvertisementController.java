@@ -9,6 +9,7 @@ import com.tomaszewski.ToysSwap.repository.AdvertisementRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -54,6 +55,7 @@ public class AdvertisementController {
 
     @ResponseBody
     @PostMapping("/advertisements")
+//    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('Admin')")
     ResponseEntity<Advertisement> createAdvertisement(@RequestBody Advertisement toCreate) {
         Advertisement result = repository.save(toCreate);
         return ResponseEntity.created(URI.create("/" + result.getId())).body(result);
