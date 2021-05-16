@@ -1,5 +1,6 @@
 package com.tomaszewski.ToysSwap.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tomaszewski.ToysSwap.enums.AgeCategory;
 import com.tomaszewski.ToysSwap.enums.Brand;
 import com.tomaszewski.ToysSwap.enums.ProductCategory;
@@ -7,7 +8,6 @@ import com.tomaszewski.ToysSwap.enums.ProductCategory;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.io.File;
 import java.math.BigDecimal;
 
 @Entity
@@ -32,9 +32,13 @@ public class Advertisement {
     private String category;
     @NotEmpty
     private String brand;
+    @JsonIgnore
+    @ManyToOne()
+//    @JoinColumn("user_id")
+    User user;
 
     public Advertisement(String title, String description, String ageCategory, BigDecimal price,
-                         String country, String category, String brand, String photo) {
+                         String country, String category, String brand, String photo, User user) {
         this.title = title;
         this.description = description;
         this.photo = photo;
@@ -43,10 +47,20 @@ public class Advertisement {
         this.city = country;
         this.category = category;
         this.brand = brand;
+        this.user = user;
     }
 
     public Advertisement() {
 
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getPhoto() {
@@ -84,8 +98,6 @@ public class Advertisement {
     public void setDescription(String description) {
         this.description = description;
     }
-
-
 
     public String getAgeCategory() {
         return ageCategory;

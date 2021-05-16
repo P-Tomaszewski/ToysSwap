@@ -1,31 +1,41 @@
 package com.tomaszewski.ToysSwap.model.projection;
 
-import org.springframework.web.multipart.MultipartFile;
+import com.tomaszewski.ToysSwap.model.User;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import java.io.File;
 import java.math.BigDecimal;
 
 public class AdvertisementWriteModel {
     private String title;
     private String description;
-    private File photoFile;
+    private String photo;
     private String ageCategory;
     private BigDecimal price;
     private String city;
     private String category;
     private String brand;
+    private User user;
+    private String login;
 
-    public AdvertisementWriteModel(String title, String description, File photoFile, String ageCategory, BigDecimal price, String city, String category, String brand) {
+
+
+    public AdvertisementWriteModel(String title, String description, String login, String photoFile, String ageCategory, BigDecimal price, String city, String category, String brand) {
         this.title = title;
         this.description = description;
-        this.photoFile = photoFile;
+        this.photo = photoFile;
         this.ageCategory = ageCategory;
         this.price = price;
         this.city = city;
         this.category = category;
         this.brand = brand;
+        this.login = login;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getTitle() {
@@ -44,12 +54,12 @@ public class AdvertisementWriteModel {
         this.description = description;
     }
 
-    public File getPhotoFile() {
-        return photoFile;
+    public String getPhoto() {
+        return photo;
     }
 
-    public void setPhotoFile(File photoFile) {
-        this.photoFile = photoFile;
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public String getAgeCategory() {

@@ -6,18 +6,18 @@ import com.tomaszewski.ToysSwap.enums.ProductCategory;
 import com.tomaszewski.ToysSwap.model.Advertisement;
 import com.tomaszewski.ToysSwap.model.projection.AdvertisementWriteModel;
 import com.tomaszewski.ToysSwap.repository.AdvertisementRepository;
+import com.tomaszewski.ToysSwap.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Valid;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
@@ -27,9 +27,11 @@ import java.util.UUID;
 public class AdvertisementController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     private final AdvertisementRepository repository;
+    private final UserRepository userRepository;
 
-    public AdvertisementController(AdvertisementRepository repository) {
+    public AdvertisementController(AdvertisementRepository repository, UserRepository userRepository) {
         this.repository = repository;
+        this.userRepository = userRepository;
     }
 
 
@@ -47,6 +49,14 @@ public class AdvertisementController {
         return repository.findById(id).get();
     }
 
+    @DeleteMapping("/advertisements/{id}")
+    public void deleteAdvertisement(@PathVariable("id") int id) {
+//        if(id!=null) {
+            logger.warn("del adv");
+        repository.deleteById(id);
+//        }
+    }
+
 //    @ResponseBody
 //    @PostMapping(value = "/upload")
 //    public void postImage(@RequestParam("file") File file) throws IOException {
@@ -56,7 +66,18 @@ public class AdvertisementController {
     @ResponseBody
     @PostMapping("/advertisements")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-    ResponseEntity<Advertisement> createAdvertisement(@RequestBody Advertisement toCreate) {
+    ResponseEntity<Advertisement> createAdvertisement(@RequestBody AdvertisementWriteModel advertisementWriteModel) {
+        Advertisement toCreate = new Advertisement();
+        int id = userRepository.findByUsername(advertisementWriteModel.getLogin()).get().getId();
+        toCreate.setUser(userRepository.findById(id).get());
+        toCreate.setPrice(advertisementWriteModel.getPrice());
+        toCreate.setDescription(advertisementWriteModel.getDescription());
+        toCreate.setTitle(advertisementWriteModel.getTitle());
+        toCreate.setCategory(ProductCategory.valueOf(advertisementWriteModel.getCategory()));
+        toCreate.setBrand(Brand.valueOf(advertisementWriteModel.getBrand()));
+        toCreate.setPhoto(advertisementWriteModel.getPhoto());
+        toCreate.setAgeCategory(AgeCategory.valueOf(advertisementWriteModel.getAgeCategory()));
+        toCreate.setCity(advertisementWriteModel.getCity());
         Advertisement result = repository.save(toCreate);
         return ResponseEntity.created(URI.create("/" + result.getId())).body(result);
     }
