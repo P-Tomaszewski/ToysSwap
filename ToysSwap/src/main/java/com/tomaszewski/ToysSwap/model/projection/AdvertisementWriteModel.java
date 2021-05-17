@@ -5,6 +5,7 @@ import com.tomaszewski.ToysSwap.model.User;
 import java.math.BigDecimal;
 
 public class AdvertisementWriteModel {
+    private int id;
     private String title;
     private String description;
     private String photo;
@@ -28,6 +29,10 @@ public class AdvertisementWriteModel {
         this.category = category;
         this.brand = brand;
         this.login = login;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getLogin() {

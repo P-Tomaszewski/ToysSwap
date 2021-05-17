@@ -3,5 +3,6 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/ToysSwap/src/main/resources/db.migration/V1__init_users_table.sql" dialect="H2" />
     <file url="file://$PROJECT_DIR$/ToysSwap/src/main/resources/db.migration/V2__init_advertisement_table.sql" dialect="H2" />
+    <file url="file://$PROJECT_DIR$/ToysSwap/src/main/resources/db.migration/V3_username_adv.sql" dialect="H2" />
   </component>
 </project>

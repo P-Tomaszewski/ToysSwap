@@ -58,6 +58,9 @@ public class Advertisement {
         return user;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public void setUser(User user) {
         this.user = user;
@@ -79,8 +82,8 @@ public class Advertisement {
         return brand;
     }
 
-    public void setBrand(Brand brand) {
-        this.brand = brand.getDisplayValue();
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
     public String getTitle() {
@@ -103,8 +106,8 @@ public class Advertisement {
         return ageCategory;
     }
 
-    public void setAgeCategory(AgeCategory ageCategory) {
-        this.ageCategory = ageCategory.getDisplayValue();
+    public void setAgeCategory(String ageCategory) {
+        this.ageCategory = ageCategory;
     }
 
     public BigDecimal getPrice() {
@@ -127,7 +130,7 @@ public class Advertisement {
         return category;
     }
 
-    public void setCategory(ProductCategory category) {
-        this.category = category.getDisplayValue();
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

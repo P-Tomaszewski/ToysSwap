@@ -15,6 +15,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -51,10 +52,29 @@ public class AdvertisementController {
 
     @DeleteMapping("/advertisements/{id}")
     public void deleteAdvertisement(@PathVariable("id") int id) {
-//        if(id!=null) {
             logger.warn("del adv");
         repository.deleteById(id);
-//        }
+    }
+
+    @PutMapping("/advertisements/{id}")
+    ResponseEntity<Advertisement> updateAdvertisement(@PathVariable("id") int id, @RequestBody @Valid AdvertisementWriteModel advertisementWriteModel) {
+        if(!repository.existsById(id)){
+            return ResponseEntity.notFound().build();
+        }
+        Advertisement toUpdate = new Advertisement();
+        int userId = userRepository.findByUsername(advertisementWriteModel.getLogin()).get().getId();
+        toUpdate.setUser(userRepository.findById(userId).get());
+        toUpdate.setPrice(advertisementWriteModel.getPrice());
+        toUpdate.setDescription(advertisementWriteModel.getDescription());
+        toUpdate.setTitle(advertisementWriteModel.getTitle());
+        toUpdate.setCategory(advertisementWriteModel.getCategory());
+        toUpdate.setBrand(advertisementWriteModel.getBrand());
+        toUpdate.setPhoto(advertisementWriteModel.getPhoto());
+        toUpdate.setAgeCategory(advertisementWriteModel.getAgeCategory());
+        toUpdate.setCity(advertisementWriteModel.getCity());
+        toUpdate.setId(id);
+        Advertisement result = repository.save(toUpdate);
+        return ResponseEntity.created(URI.create("/" + result.getId())).body(result);
     }
 
 //    @ResponseBody
@@ -73,10 +93,10 @@ public class AdvertisementController {
         toCreate.setPrice(advertisementWriteModel.getPrice());
         toCreate.setDescription(advertisementWriteModel.getDescription());
         toCreate.setTitle(advertisementWriteModel.getTitle());
-        toCreate.setCategory(ProductCategory.valueOf(advertisementWriteModel.getCategory()));
-        toCreate.setBrand(Brand.valueOf(advertisementWriteModel.getBrand()));
+        toCreate.setCategory(advertisementWriteModel.getCategory());
+        toCreate.setBrand(advertisementWriteModel.getBrand());
         toCreate.setPhoto(advertisementWriteModel.getPhoto());
-        toCreate.setAgeCategory(AgeCategory.valueOf(advertisementWriteModel.getAgeCategory()));
+        toCreate.setAgeCategory(advertisementWriteModel.getAgeCategory());
         toCreate.setCity(advertisementWriteModel.getCity());
         Advertisement result = repository.save(toCreate);
         return ResponseEntity.created(URI.create("/" + result.getId())).body(result);
