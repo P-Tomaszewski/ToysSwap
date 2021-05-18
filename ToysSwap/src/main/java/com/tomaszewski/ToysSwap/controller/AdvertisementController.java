@@ -50,6 +50,13 @@ public class AdvertisementController {
         return repository.findById(id).get();
     }
 
+    @ResponseBody
+    @GetMapping(value = "/advertisements/age/{ageCategory}")
+    ResponseEntity<List<Advertisement>> getAdvertisementByAgeCategory(@PathVariable("ageCategory") String ageCategory) {
+        logger.warn("ret age");
+        return ResponseEntity.ok(repository.findByAgeCategory(ageCategory));
+    }
+
     @DeleteMapping("/advertisements/{id}")
     public void deleteAdvertisement(@PathVariable("id") int id) {
             logger.warn("del adv");
