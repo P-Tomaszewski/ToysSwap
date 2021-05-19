@@ -16,12 +16,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import javax.validation.constraints.AssertTrue;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -56,6 +58,52 @@ public class AdvertisementController {
         logger.warn("ret age");
         return ResponseEntity.ok(repository.findByAgeCategory(ageCategory));
     }
+
+    @ResponseBody
+    @GetMapping(value = "/advertisements/age/category/{category}")
+    ResponseEntity<List<Advertisement>> getAdvertisementByCategory(@PathVariable("category")String category) {
+        String[] parts = category.split("\\$");
+        System.out.println(parts[0] + " " + parts[1] + " "+ parts[2] + " " + parts[3]);
+        logger.warn(category);
+
+        if(!parts[1].equals("undefined") && !parts[2].equals("undefined") && !parts[3].equals("undefined")){
+            return ResponseEntity.ok(repository.findByCategoryCityBrand(parts[0], parts[1], parts[2], parts[3]));
+        }
+        if(!parts[1].equals("undefined") && parts[2].equals("undefined") && parts[3].equals("undefined")){
+            return ResponseEntity.ok(repository.findByBrand(parts[0], parts[1]));
+        }
+        if(parts[1].equals("undefined") && !parts[2].equals("undefined") && parts[3].equals("undefined")){
+            return ResponseEntity.ok(repository.findByCity(parts[0], parts[2]));
+        }
+        if(parts[1].equals("undefined") && parts[2].equals("undefined") && !parts[3].equals("undefined")){
+            return ResponseEntity.ok(repository.findByCategory(parts[0], parts[3]));
+        }
+        if(!parts[1].equals("undefined") && !parts[2].equals("undefined") && parts[3].equals("undefined")){
+            return ResponseEntity.ok(repository.findByBrandCity(parts[0], parts[1], parts[2]));
+        }
+        if(parts[1].equals("undefined") && !parts[2].equals("undefined") && !parts[3].equals("undefined")){
+            return ResponseEntity.ok(repository.findByCategoryCity(parts[0], parts[2], parts[3]));
+        }
+        if(!parts[1].equals("undefined") && parts[2].equals("undefined") && !parts[3].equals("undefined")){
+            return ResponseEntity.ok(repository.findByCategoryBrand(parts[0],parts[1], parts[3]));
+        }
+        if(parts[1].equals("empty") && parts[2].equals("empty") && parts[3].equals("empty")){
+            return ResponseEntity.ok(repository.findByAgeCategory(parts[0]));
+        } else {
+            System.out.println(parts[0] + " " + parts[3]);
+            return ResponseEntity.ok(repository.findByAgeCategory(parts[0]));
+        }
+
+//        return ResponseEntity.ok(repository.findByCategory(category).stream()
+//                .filter(g -> g.getBrand().equals(parts[1]))
+//                .filter(g -> g.getCity().equals(parts[2]))
+//                .filter(g -> g.getCategory().equals(parts[3]))
+//                .collect(Collectors.toList()));
+
+    }
+
+
+
 
     @DeleteMapping("/advertisements/{id}")
     public void deleteAdvertisement(@PathVariable("id") int id) {
